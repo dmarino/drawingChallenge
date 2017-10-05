@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
+import { SketchPicker } from 'react-color';
 
 import PropTypes from "prop-types";
 
@@ -12,6 +13,10 @@ class Dibujo extends Component{
             color:"#000000"
         };        
     }
+
+    handleChangeComplete = (colorT) => {
+        this.setState({ color: colorT.hex });
+    };
 
     mouseDown = (e) => {
         var d = ReactDOM.findDOMNode(this).getBoundingClientRect();
@@ -86,7 +91,11 @@ class Dibujo extends Component{
             <h1>DRAGON CYBORG</h1>
             <canvas id="canvas" width="500" height="500" onMouseDown={this.mouseDown} onMouseMove={this.mouseMove} onMouseUp ={this.mouseUp} onMouseLeave={this.mouseLeave} ref={(c) => this.canvas = c}>
             </canvas>
-            <input type="text" className="basic"/>
+            <SketchPicker
+                color={ this.state.color }
+                disableAlpha = {true}
+                onChange={ this.handleChangeComplete }
+            />
             </div>
         );
     }
