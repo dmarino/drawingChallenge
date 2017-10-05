@@ -14,6 +14,9 @@ class App extends Component{
 		super(props);
 
 		this.usuario = this.usuario.bind(this);
+		this.state={
+			currentUser:null
+		};
 	}
 
 	usuario(nombre){
@@ -26,7 +29,7 @@ class App extends Component{
 		return (
 			<div className="App">
 			<Login onClick = {this.usuario}></Login>
-			{this.state.currentUser ? 
+			{this.state.currentUser===null ? 
 				<Principal></Principal>:
 				<Dibujo></Dibujo>
 			}
