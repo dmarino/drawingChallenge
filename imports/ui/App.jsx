@@ -5,6 +5,7 @@ import "./Styles/App.css";
 import Login from "./Login.jsx";
 import Principal from "./Principal.jsx";
 import Dibujo from "./Dibujo.jsx";
+import Menu_lateral from "./Menu_lateral.jsx";
 
 import {Usuarios} from "../api/usuarios.js";
 import {Concurso} from "../api/concurso.js";
@@ -15,7 +16,7 @@ class App extends Component{
 
 		this.usuario = this.usuario.bind(this);
 		this.state={
-			currentUser:{},
+			currentUser:null,
 			dibujando:false
 		};
 	}
@@ -26,14 +27,23 @@ class App extends Component{
 			currentUser:nombre
 		});
 	}
+	participar(){
+		var dibujar = this.state.dibujando;
+		dibujar = !dibujar;
+		this.setState({
+			dibujando:dibujar
+		});
+	}
 
 	render(){
 		return (
 			<div className="App">
-			<Login onClick = {this.usuario}></Login>
+			<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
 			<div className="espacio"></div>
+			<Menu_lateral concursos={this.props.Concurso} user={this.state.currentUser}
+				participar={this.participar.bind(this)}></Menu_lateral>
 			{!this.state.dibujando ? 
-				<Principal concursos={this.props.Concurso} user={this.state.currentUser}></Principal>:
+				<Principal></Principal>:
 				<Dibujo></Dibujo>
 			}
 			</div>);

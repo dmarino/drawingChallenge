@@ -1,0 +1,24 @@
+.sidebar{
+	text-align: center;
+	padding-top: 2rem;
+	}
+.static{
+	width: 7rem;
+	position: fixed;
+	text-align: left;
+	background-color: #54D1B0;
+	height: 100%;
+	z-index: 10;
+}
+.static .list{
+	list-style-type:none;
+	padding-left: 1.3rem;
+	width: 5.9rem;
+}
+.static li{
+	padding-top: 0.8rem;
+	font-size: 1.2rem;
+}
+.menuLateral{
+	width:8rem;
+}

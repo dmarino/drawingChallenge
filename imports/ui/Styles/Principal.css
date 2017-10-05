@@ -6,20 +6,6 @@
 #asd{
 	height: 500rem;
 }
-.sidebar{
-	text-align: center;
-	padding-top: 2rem;
-	background-color: #54D1B0;
-}
-.static{
-  position:fixed;
-  display:block;
-	list-style-type:none;
-}
-.static li{
-	padding-top: 0.8rem;
-	font-size: 1.2rem;
-}
 .cuerpo{
-	padding-left: 0;
+	padding-left: 7rem;
 }

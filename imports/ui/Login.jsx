@@ -9,17 +9,27 @@ class Login extends Component{
 	}
 
 	onClick(evt){
-		if(evt.key === "Enter")
+		if(evt.key === "Enter"){
 			this.props.onClick(this.input.value);
+			this.button.click();
+		}
 	}
 
 	render(){
+		var login;
+		if(this.props.user!==null){
+			login = "Bienvenido usuario: " + this.props.user;
+		}
 		return (
 			<div className="Login">
 
 				<nav className="navbar fixed-top navbar-light bg-light">
 				  <a className="navbar-brand" href="#">Drawing Challenge</a>
-				  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				  {login}
+				  <button className="navbar-toggler" type="button" data-toggle="collapse" 
+				  data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" 
+				  aria-label="Toggle navigation"
+				  ref={(button)=>this.button = button}>
 				    <span className="navbar-toggler-icon"></span>
 				  </button>
 				  <div className="collapse navbar-collapse" id="navbarText">
