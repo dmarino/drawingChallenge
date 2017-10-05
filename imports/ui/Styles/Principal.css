@@ -1,0 +1,25 @@
+.Banner{
+  height: 8rem;
+  background-image: url("https://about.canva.com/es_co/wp-content/uploads/sites/3/2015/02/Etsy-Banners.png");
+  -webkit-background-size: contain;
+}
+#asd{
+	height: 500rem;
+}
+.sidebar{
+	text-align: center;
+	padding-top: 2rem;
+	background-color: #54D1B0;
+}
+.static{
+  position:fixed;
+  display:block;
+	list-style-type:none;
+}
+.static li{
+	padding-top: 0.8rem;
+	font-size: 1.2rem;
+}
+.cuerpo{
+	padding-left: 0;
+}

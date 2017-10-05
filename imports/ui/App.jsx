@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {createContainer} from "meteor/react-meteor-data";
-
+import "./Styles/App.css";
 import Login from "./Login.jsx";
 import Principal from "./Principal.jsx";
 import Dibujo from "./Dibujo.jsx";
@@ -15,11 +15,13 @@ class App extends Component{
 
 		this.usuario = this.usuario.bind(this);
 		this.state={
-			currentUser:null
+			currentUser:null,
+			dibujando:false
 		};
 	}
 
 	usuario(nombre){
+		console.log(nombre);
 		this.setState({
 			currentUser:nombre
 		});
@@ -29,8 +31,9 @@ class App extends Component{
 		return (
 			<div className="App">
 			<Login onClick = {this.usuario}></Login>
-			{this.state.currentUser===null ? 
-				<Principal></Principal>:
+			<div className="espacio"></div>
+			{!this.state.dibujando ? 
+				<Principal concursos={this.props.Concurso} user={this.state.currentUser}></Principal>:
 				<Dibujo></Dibujo>
 			}
 			</div>);
