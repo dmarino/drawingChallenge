@@ -15,7 +15,8 @@ class App extends Component{
 
 		this.usuario = this.usuario.bind(this);
 		this.state={
-
+			currentUser:{},
+			dibujando:false
 		};
 	}
 
