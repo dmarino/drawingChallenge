@@ -20,23 +20,26 @@ class Dibujo extends Component{
 
     mouseDown = (e) => {
         var d = ReactDOM.findDOMNode(this).getBoundingClientRect();
-        var mouseX = e.pageX - d.left;
-        var mouseY = e.pageY - d.top;
+        var mouseX = e.pageX;
+        var mouseY = e.pageY - 105;
 
-        console.log(e.pageY + "-" + d.top + "-" + mouseY);
+        console.log(d);
 
         this.setState({
             paint:true
         });
 
-        this.addPunto(e.pageX - d.left, e.pageY - d.top);
+        this.addPunto(mouseX , mouseY);
         this.redraw();        
     }
 
     mouseMove = (e) => {    
         if(this.state.paint){
-            var d = ReactDOM.findDOMNode(this).getBoundingClientRect();       
-            this.addPunto(e.pageX - d.left, e.pageY - d.top, true);
+            var d = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
+            var mouseX = e.pageX;
+            var mouseY = e.pageY - 105;
+
+            this.addPunto(mouseX, mouseY, true);
             this.redraw();
         }   
     }
@@ -88,14 +91,20 @@ class Dibujo extends Component{
     render(){
         return (
             <div id="dibujoContenedor">
-            <h1>DRAGON CYBORG</h1>
-            <canvas id="canvas" width="500" height="500" onMouseDown={this.mouseDown} onMouseMove={this.mouseMove} onMouseUp ={this.mouseUp} onMouseLeave={this.mouseLeave} ref={(c) => this.canvas = c}>
-            </canvas>
-            <SketchPicker
-                color={ this.state.color }
-                disableAlpha = {true}
-                onChange={ this.handleChangeComplete }
-            />
+            <h1>TEMA: DRAGON CYBORG</h1>
+            <div className="row">
+                <div className="col-md-8">
+                    <canvas id="canvas" width="500" height="500" onMouseDown={this.mouseDown} onMouseMove={this.mouseMove} onMouseUp ={this.mouseUp} onMouseLeave={this.mouseLeave} ref={(c) => this.canvas = c}>
+                    </canvas>
+                </div>
+                <div className="col-md-4">
+                    <SketchPicker
+                        color={ this.state.color }
+                        disableAlpha = {true}
+                        onChange={ this.handleChangeComplete }
+                    />
+                </div>
+            </div>
             </div>
         );
     }
