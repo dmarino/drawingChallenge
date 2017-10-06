@@ -17,6 +17,8 @@ class App extends Component{
 		this.usuario = this.usuario.bind(this);
 		this.state={
 			currentUser:null,
+			currentConcurso:null,
+			currentDibujo:null,
 			dibujando:false
 		};
 	}
@@ -24,14 +26,20 @@ class App extends Component{
 	usuario(nombre){
 		console.log(nombre);
 		this.setState({
-			currentUser:nombre
+			currentUser:nombre,
+			currentConcurso:this.props.concursos[0]
 		});
 	}
+
 	participar(){
 		var dibujar = this.state.dibujando;
 		dibujar = !dibujar;
+
+		var dibujo = Concurso.find({"dibujos.autor": this.state.currentUser, "nombre":this.state.currentConcurso.nombre}, {_id: 0, 'dibujos.$': 1});
+
 		this.setState({
-			dibujando:dibujar
+		    dibujando:dibujar,
+		    currentDibujo: dibujo
 		});
 	}
 
@@ -40,22 +48,22 @@ class App extends Component{
 			<div className="App">
 			<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
 			<div className="espacio"></div>
-			<Menu_lateral concursos={this.props.Concurso} user={this.state.currentUser}
+			<Menu_lateral concursos={this.props.concursos} user={this.state.currentUser}
 				participar={this.participar.bind(this)}></Menu_lateral>
 			{!this.state.dibujando ? 
 				<Principal></Principal>:
-				<Dibujo></Dibujo>
+				<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
 			}
 			</div>);
 	}
 }
 
 App.PropTypes={
-
+    concursos: PropTypes.array.isRequired,
 };
 
 export default createContainer(()=>{
 	return{
-		Concurso: Concurso.find({}).fetch()
+		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch()
 	};
 },App);

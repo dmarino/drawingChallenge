@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { SketchPicker } from 'react-color';
 
 import PropTypes from "prop-types";
+import "./Styles/Dibujo.css";
 
 class Dibujo extends Component{
     constructor(props){
@@ -67,6 +68,8 @@ class Dibujo extends Component{
         this.setState({
             puntos:puntosT
         })
+
+        console.log(this.props.dibujo);
     }
 
     redraw() {
@@ -111,8 +114,7 @@ class Dibujo extends Component{
 }
 
 Dibujo.PropTypes={
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    players:PropTypes.array.isRequired
+
 };
+
 export default Dibujo;
