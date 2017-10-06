@@ -38,12 +38,17 @@ class App extends Component{
 		var dibujar = this.state.dibujando;
 		dibujar = !dibujar;
 
-		console.log(this.state.currentUser);
-		console.log(this.state.currentConcurso.nombre);
-
-		var dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":this.state.currentUser}).fetch();
-
-		console.log(dibujo);
+		var dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":this.state.currentUser}).fetch()[0];
+		if(!dibujo){
+		    Dibujos.insert({
+		        autor: this.state.currentUser, 
+		        concurso: this.state.currentConcurso.nombre,
+		        editado: new Date(),
+		        likes : 0,
+		        dibujo:[]
+		    });
+		    dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":this.state.currentUser}).fetch()[0];
+		}
 
 		this.setState({
 		    dibujando:dibujar,
@@ -61,11 +66,10 @@ class App extends Component{
 	}
 
 	verDibujos(){
-		//Concurso.find({"dibujos.autor":currentUser},{_id:0, "dibujos.$":1});
-		//buscar mis propios dibujos por usuario
+		var dibujos = Dibujos.find({"dibujos.autor":currentUser});
 		this.setState({
 			dibujando:false,
-			misDibujos:[{dibujo:"holi", autor:"yo"}, {dibujo:"jeje", autor:"yo"}]
+			misDibujos:dibujos
 		})
 	}
 
@@ -76,6 +80,7 @@ class App extends Component{
 			misDibujos:[]
 		});
 	}
+
 	render(){
 		return (
 			<div className="App">

@@ -5,6 +5,8 @@ import { SketchPicker } from 'react-color';
 import PropTypes from "prop-types";
 import "./Styles/Dibujo.css";
 
+import {Dibujos} from "../api/dibujos.js";
+
 class Dibujo extends Component{
     constructor(props){
         super(props);
@@ -57,6 +59,7 @@ class Dibujo extends Component{
         })
     }   
 
+
     addPunto = (xP,yP,draggingP) => {
         var puntosT = this.state.puntos;
         puntosT.push({
@@ -65,11 +68,14 @@ class Dibujo extends Component{
             dragging:draggingP,
             color:this.state.color
         });
+        
         this.setState({
             puntos:puntosT
         })
 
-        console.log(this.props.dibujo);
+        Dibujos.update(this.props.dibujo._id, {
+            $set: { dibujo: this.state.puntos},
+        });
     }
 
     redraw() {
