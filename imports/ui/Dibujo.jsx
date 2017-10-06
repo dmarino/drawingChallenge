@@ -14,7 +14,14 @@ class Dibujo extends Component{
             puntos:[],
             paint:false,
             color:"#000000"
-        };        
+        };    
+    }
+
+    componentDidMount(){
+        this.forceUpdate();
+    }
+    componentWillUpdate(){
+        this.redraw();
     }
 
     handleChangeComplete = (colorT) => {
@@ -32,8 +39,7 @@ class Dibujo extends Component{
             paint:true
         });
 
-        this.addPunto(mouseX , mouseY);
-        this.redraw();        
+        this.addPunto(mouseX , mouseY);      
     }
 
     mouseMove = (e) => {    
@@ -43,7 +49,6 @@ class Dibujo extends Component{
             var mouseY = e.pageY - 105;
 
             this.addPunto(mouseX, mouseY, true);
-            this.redraw();
         }   
     }
 
@@ -61,20 +66,16 @@ class Dibujo extends Component{
 
 
     addPunto = (xP,yP,draggingP) => {
-        var puntosT = this.state.puntos;
+        var puntosT = this.props.dibujo.dibujo;
         puntosT.push({
             x:xP,
             y:yP,
             dragging:draggingP,
             color:this.state.color
         });
-        
-        this.setState({
-            puntos:puntosT
-        })
 
         Dibujos.update(this.props.dibujo._id, {
-            $set: { dibujo: this.state.puntos},
+            $set: { dibujo: puntosT},
         });
     }
 
@@ -82,16 +83,16 @@ class Dibujo extends Component{
         let ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, 500, 500);
 
-        for(var i=0; i < this.state.puntos.length; i++) {  
+        for(var i=0; i < this.props.dibujo.dibujo.length; i++) {  
             ctx.beginPath();
-            if(this.state.puntos[i].dragging && i){
-                ctx.moveTo(this.state.puntos[i-1].x, this.state.puntos[i-1].y);
+            if(this.props.dibujo.dibujo[i].dragging && i){
+                ctx.moveTo(this.props.dibujo.dibujo[i-1].x, this.props.dibujo.dibujo[i-1].y);
             }else{
-                ctx.moveTo(this.state.puntos[i].x-1, this.state.puntos[i].y);
+                ctx.moveTo(this.props.dibujo.dibujo[i].x-1, this.props.dibujo.dibujo[i].y);
             }
-            ctx.lineTo(this.state.puntos[i].x, this.state.puntos[i].y);
+            ctx.lineTo(this.props.dibujo.dibujo[i].x, this.props.dibujo.dibujo[i].y);
             ctx.closePath();
-            ctx.strokeStyle = this.state.puntos[i].color;
+            ctx.strokeStyle = this.props.dibujo.dibujo[i].color;
             ctx.stroke();
         }
     }
@@ -120,7 +121,7 @@ class Dibujo extends Component{
 }
 
 Dibujo.PropTypes={
-
+    dibujo : PropTypes.any.isRequired,
 };
 
 export default Dibujo;
