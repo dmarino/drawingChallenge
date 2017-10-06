@@ -21,7 +21,7 @@ class Dibujo extends Component{
 
     mouseDown = (e) => {
         var d = ReactDOM.findDOMNode(this).getBoundingClientRect();
-        var mouseX = e.pageX;
+        var mouseX = e.pageX - 130;
         var mouseY = e.pageY - 105;
 
         console.log(d);
@@ -37,7 +37,7 @@ class Dibujo extends Component{
     mouseMove = (e) => {    
         if(this.state.paint){
             var d = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
-            var mouseX = e.pageX;
+            var mouseX = e.pageX - 130;
             var mouseY = e.pageY - 105;
 
             this.addPunto(mouseX, mouseY, true);

@@ -16,10 +16,11 @@ class App extends Component{
 
 		this.usuario = this.usuario.bind(this);
 		this.state={
-			currentUser:null,
-			currentConcurso:null,
-			currentDibujo:null,
-			dibujando:false
+			currentUser:null,			
+			currentConcurso:{},
+			currentDibujo:{},
+			dibujando:false,
+			misDibujos:[]
 		};
 	}
 
@@ -27,11 +28,12 @@ class App extends Component{
 		console.log(nombre);
 		this.setState({
 			currentUser:nombre,
-			currentConcurso:this.props.concursos[0]
+			dibujando:false
 		});
 	}
 
 	participar(){
+
 		var dibujar = this.state.dibujando;
 		dibujar = !dibujar;
 
@@ -39,21 +41,50 @@ class App extends Component{
 
 		this.setState({
 		    dibujando:dibujar,
-		    currentDibujo: dibujo
+		    currentDibujo: dibujo,
+			misDibujos:[]		
+        });
+	}
+
+	verConcursoDia(){
+		console.log(":D");
+		this.setState({
+			dibujando:false,
+			misDibujos:[]
 		});
 	}
 
+	verDibujos(){
+		//Concurso.find({"dibujos.autor":currentUser},{_id:0, "dibujos.$":1});
+		//buscar mis propios dibujos por usuario
+		this.setState({
+			dibujando:false,
+			misDibujos:[{dibujo:"holi", autor:"yo"}, {dibujo:"jeje", autor:"yo"}]
+		})
+	}
+
+	cerrarSesion(){
+		this.setState({
+			dibujando:false,
+			currentUser:null,
+			misDibujos:[]
+		});
+	}
 	render(){
 		return (
 			<div className="App">
-			<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
-			<div className="espacio"></div>
-			<Menu_lateral concursos={this.props.concursos} user={this.state.currentUser}
-				participar={this.participar.bind(this)}></Menu_lateral>
-			{!this.state.dibujando ? 
-				<Principal></Principal>:
-				<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
-			}
+				<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
+				<div className="espacio"></div>
+				<Menu_lateral concursos={this.props.concursos} user={this.state.currentUser}
+					participar={this.participar.bind(this)}
+					verDibujos={this.verDibujos.bind(this)}
+					cerrarSesion={this.cerrarSesion.bind(this)}
+					verConcursoDia={this.verConcursoDia.bind(this)}></Menu_lateral>
+				{!this.state.dibujando ? 
+					<Principal concursos={this.props.concursos} misDibujos={this.state.misDibujos}
+								></Principal>:
+					<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
+				}
 			</div>);
 	}
 }
