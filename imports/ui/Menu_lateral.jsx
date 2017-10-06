@@ -18,24 +18,43 @@ class Menu_lateral extends Component{
 		</li>);
 	}
 
+	verConcursoDia(){
+		console.log("concurso del dia");
+		this.props.verConcursoDia();
+	}
 	participar(){
 		console.log("heosdkm");
 		this.props.participar();
 	}
 
+	verDibujos(){
+		console.log("ver Dibujos");
+		this.props.verDibujos();
+	}
+	cerrarSesion(){
+		console.log("cerrarSesion");
+		this.props.cerrarSesion();
+	}
+
 	render(){
 		var user;
+		var misDibujos;
+		var cerrarSesion;
 		console.log(this.props.user);
-		if(this.props.user!==null)
+		if(this.props.user!==null){
 			user=<li onClick={this.participar.bind(this)}>Participar</li>;
+			misDibujos=<li onClick={()=>this.verDibujos()}>Ver mis dibujos</li>;
+			cerrarSesion=<li onClick={()=>this.cerrarSesion()}>Cerrar Sesion</li>;
+		}
 		return (
 			<div className="Menu_lateral">
 				<div className="static">
 					<ul className="list">
+						<li onClick={()=>this.verConcursoDia()}>Ver Concurso del día</li>
 						{user}
-						<li>Ver Concurso del día</li>
+						{misDibujos}
 						{this.darConcursos()}
-						<li>Buscar Concurso anterior</li>
+						{cerrarSesion}
 					</ul>
 				</div>
 			</div>);

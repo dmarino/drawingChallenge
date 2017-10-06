@@ -17,35 +17,66 @@ class App extends Component{
 		this.usuario = this.usuario.bind(this);
 		this.state={
 			currentUser:null,
-			dibujando:false
+			dibujando:false,
+			misDibujos:[]
 		};
 	}
 
 	usuario(nombre){
 		console.log(nombre);
 		this.setState({
-			currentUser:nombre
+			currentUser:nombre,
+			dibujando:false
 		});
 	}
 	participar(){
-		var dibujar = this.state.dibujando;
-		dibujar = !dibujar;
+//		var dibujar = this.state.dibujando;
+//		dibujar = !dibujar;
 		this.setState({
-			dibujando:dibujar
+			misDibujos:[],
+			dibujando:true
 		});
 	}
 
+	verConcursoDia(){
+		console.log(":D");
+		this.setState({
+			dibujando:false,
+			misDibujos:[]
+		});
+	}
+
+	verDibujos(){
+		//Concurso.find({"dibujos.autor":currentUser},{_id:0, "dibujos.$":1});
+		//buscar mis propios dibujos por usuario
+		this.setState({
+			dibujando:false,
+			misDibujos:[{dibujo:"holi", autor:"yo"}, {dibujo:"jeje", autor:"yo"}]
+		})
+	}
+
+	cerrarSesion(){
+		this.setState({
+			dibujando:false,
+			currentUser:null,
+			misDibujos:[]
+		});
+	}
 	render(){
 		return (
 			<div className="App">
-			<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
-			<div className="espacio"></div>
-			<Menu_lateral concursos={this.props.Concurso} user={this.state.currentUser}
-				participar={this.participar.bind(this)}></Menu_lateral>
-			{!this.state.dibujando ? 
-				<Principal></Principal>:
-				<Dibujo></Dibujo>
-			}
+				<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
+				<div className="espacio"></div>
+				<Menu_lateral concursos={this.props.Concurso} user={this.state.currentUser}
+					participar={this.participar.bind(this)}
+					verDibujos={this.verDibujos.bind(this)}
+					cerrarSesion={this.cerrarSesion.bind(this)}
+					verConcursoDia={this.verConcursoDia.bind(this)}></Menu_lateral>
+				{!this.state.dibujando ? 
+					<Principal concursos={this.props.Concurso} misDibujos={this.state.misDibujos}
+								></Principal>:
+					<Dibujo></Dibujo>
+				}
 			</div>);
 	}
 }
