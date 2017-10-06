@@ -9,6 +9,7 @@ import Menu_lateral from "./Menu_lateral.jsx";
 
 import {Usuarios} from "../api/usuarios.js";
 import {Concurso} from "../api/concurso.js";
+import {Dibujos} from "../api/dibujos.js";
 
 class App extends Component{
 	constructor(props){
@@ -16,8 +17,7 @@ class App extends Component{
 
 		this.usuario = this.usuario.bind(this);
 		this.state={
-			currentUser:null,			
-			currentConcurso:{},
+			currentUser:null,
 			currentDibujo:{},
 			dibujando:false,
 			misDibujos:[]
@@ -41,7 +41,7 @@ class App extends Component{
 		console.log(this.state.currentUser);
 		console.log(this.state.currentConcurso.nombre);
 
-		var dibujo = Concurso.find({"nombre":this.state.currentConcurso.nombre,"dibujos.autor":this.state.currentUser},{fields:{dibujos:1}}).fetch();
+		var dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":this.state.currentUser}).fetch();
 
 		console.log(dibujo);
 
@@ -97,10 +97,12 @@ class App extends Component{
 
 App.PropTypes={
     concursos: PropTypes.array.isRequired,
+    usuarios: PropTypes.array.isRequired,
 };
 
 export default createContainer(()=>{
 	return{
-		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch()
+		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch(),
+		usuarios: Usuarios.find({}).fetch()
 	};
 },App);
