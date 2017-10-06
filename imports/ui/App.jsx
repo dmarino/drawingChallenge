@@ -28,6 +28,7 @@ class App extends Component{
 		console.log(nombre);
 		this.setState({
 			currentUser:nombre,
+			currentConcurso:this.props.concursos[0],
 			dibujando:false
 		});
 	}
@@ -37,7 +38,12 @@ class App extends Component{
 		var dibujar = this.state.dibujando;
 		dibujar = !dibujar;
 
-		var dibujo = Concurso.find({"dibujos.autor": this.state.currentUser, "nombre":this.state.currentConcurso.nombre}, {_id: 0, 'dibujos.$': 1});
+		console.log(this.state.currentUser);
+		console.log(this.state.currentConcurso.nombre);
+
+		var dibujo = Concurso.find({"nombre":this.state.currentConcurso.nombre,"dibujos.autor":this.state.currentUser},{fields:{dibujos:1}}).fetch();
+
+		console.log(dibujo);
 
 		this.setState({
 		    dibujando:dibujar,
