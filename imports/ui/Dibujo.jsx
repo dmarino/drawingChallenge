@@ -33,7 +33,6 @@ class Dibujo extends Component{
         var mouseX = e.pageX - 130;
         var mouseY = e.pageY - 105;
 
-        console.log(d);
 
         this.setState({
             paint:true
@@ -99,7 +98,6 @@ class Dibujo extends Component{
 
 
     render(){
-        console.log(this.props.dibujo);
         return (
             <div id="dibujoContenedor">
             <h1>TEMA: {this.props.dibujo.concurso}</h1>

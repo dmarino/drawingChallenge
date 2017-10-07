@@ -21,9 +21,7 @@ class Principal extends Component{
 			else if(concursos.length===0)
 				rta="No existen concursos para mostrar";
 			else{
-				console.log(concursos);
 				concursos = concursos[0];
-				console.log(concursos);
 				rta = "concurso";
 			}
 		}
@@ -42,7 +40,6 @@ class Principal extends Component{
 			return rta;
 		}
 		else{
-			console.log(this.props.dibujos);
 			return (
 				<div>
 					<span>{concursos.nombre}</span>

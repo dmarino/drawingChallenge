@@ -46,19 +46,13 @@ class Menu_lateral extends Component{
 	verDibujos(){
 		this.props.verDibujos();
 	}
-	cerrarSesion(){
-		this.props.cerrarSesion();
-	}
 
 	render(){
 		var user;
 		var misDibujos;
-		var cerrarSesion;
-		console.log(this.props.user);
 		if(this.props.user!==null){
 			user=<li onClick={this.participar.bind(this)}>Participar</li>;
 			misDibujos=<li onClick={()=>this.verDibujos()}>Ver mis dibujos</li>;
-			cerrarSesion=<li onClick={()=>this.cerrarSesion()}>Cerrar Sesion</li>;
 		}
 		return (
 			<div className="Menu_lateral">
@@ -68,7 +62,6 @@ class Menu_lateral extends Component{
 						{user}
 						{misDibujos}
 						{this.darConcursos()}
-						{cerrarSesion}
 					</ul>
 				</div>
 			</div>);
@@ -77,7 +70,7 @@ class Menu_lateral extends Component{
 
 Menu_lateral.PropTypes={
 	user: PropTypes.string.isRequired,
-	concursos: PropTypes.object.isRequired
+	concursos: PropTypes.array.isRequired
 };
 
 export default Menu_lateral;
