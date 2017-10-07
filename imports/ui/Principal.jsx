@@ -15,7 +15,10 @@ class Principal extends Component{
 			rta = "No tiene dibujos para mostrar";
 		}
 		else{
-			if(concursos.length===0)
+			if(this.props.anteriorConcurso.length!==0){
+				rta = "Anterior Concurso";
+			}
+			else if(concursos.length===0)
 				rta="No existen concursos para mostrar";
 			else{
 				console.log(concursos);
@@ -24,7 +27,18 @@ class Principal extends Component{
 				rta = "concurso";
 			}
 		}
-		if(rta!=="concurso"){
+		if(rta === "Anterior Concurso"){
+			return (
+				<div>
+				<div className="feedInicio row">
+						{this.props.anteriorConcurso.map((p,i)=>{
+							return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+						})}
+				</div>
+				</div>
+			);
+		}
+		else if(rta!=="concurso"){
 			return rta;
 		}
 		else{

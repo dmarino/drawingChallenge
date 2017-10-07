@@ -22,3 +22,11 @@
 .menuLateral{
 	width:8rem;
 }
+
+.nav.nav-list.collapse{
+	visibility: collapse;
+}
+
+.nav.nav-list.collapse.show{
+	visibility: visible;
+}

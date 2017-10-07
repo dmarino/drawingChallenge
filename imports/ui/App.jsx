@@ -21,6 +21,7 @@ class App extends Component{
 			currentDibujo:{},
 			dibujando:false,
 			misDibujosActivos:false,
+			antConcurso:[],
 			misDibujos:[]
 		};
 	}
@@ -55,13 +56,24 @@ class App extends Component{
 		    dibujando:dibujar,
 		    currentDibujo: dibujo,
 		    misDibujosActivos:false,
+		    antConcurso:[],
 			misDibujos:[]		
         });
 	}
 
 	verConcursoDia(){
-		console.log(":D");
 		this.setState({
+			dibujando:false,
+			misDibujosActivos:false,
+			antConcurso:[],
+			misDibujos:[]
+		});
+	}
+
+	verConcurso(nombre){
+		var concursoAnterior = Dibujos.find({"concurso":nombre}).fetch();
+		this.setState({
+			antConcurso:concursoAnterior,
 			dibujando:false,
 			misDibujosActivos:false,
 			misDibujos:[]
@@ -73,15 +85,18 @@ class App extends Component{
 		this.setState({
 			dibujando:false,
 			misDibujosActivos:true,
+			antConcurso:[],
 			misDibujos:dibujos
 		})
 	}
 
 	cerrarSesion(){
 		this.setState({
-			dibujando:false,
 			currentUser:null,
+			currentDibujo:{},
+			dibujando:false,
 			misDibujosActivos:false,
+			antConcurso:[],
 			misDibujos:[]
 		});
 	}
@@ -99,11 +114,13 @@ class App extends Component{
 					participar={this.participar.bind(this)}
 					verDibujos={this.verDibujos.bind(this)}
 					cerrarSesion={this.cerrarSesion.bind(this)}
-					verConcursoDia={this.verConcursoDia.bind(this)}></Menu_lateral>
+					verConcursoDia={this.verConcursoDia.bind(this)}
+					verConcurso={this.verConcurso.bind(this)}></Menu_lateral>
 				{!this.state.dibujando ? 
 					<Principal concursos={this.props.concursos} misDibujos={this.state.misDibujos}
 								misDibujosActivos={this.state.misDibujosActivos}
-									dibujos = {dibujos}></Principal>:
+									dibujos = {dibujos}
+									anteriorConcurso = {this.state.antConcurso}></Principal>:
 					<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
 				}
 			</div>);

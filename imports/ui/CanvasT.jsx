@@ -17,7 +17,6 @@ class CanvasT extends Component{
 
 
 	redraw() {
-		console.log("llega");
         let ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, 500, 500);
 
@@ -36,7 +35,6 @@ class CanvasT extends Component{
     }
 
 	render(){
-		console.log("al menos al render");
 		return (
 				<div className="col-sm-6 CanvasT">
 				{this.props.tema?

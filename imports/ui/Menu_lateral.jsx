@@ -11,28 +11,42 @@ class Menu_lateral extends Component{
 	darConcursos(){
 		var rta;
 		if(this.props.concursos.length!==0){
-			console.log(this.props.concursos);
-			rta = "Devuelve algo :D" ;
+			var concursos = this.props.concursos;
+			concursos = concursos.slice(0);
+			concursos.shift();
+			return(
+				<div>
+				<li>
+				<a className="accordion-heading" data-toggle="collapse" data-target="#submenu">
+		 			<span className="nav-header-primary">Concursos Anteriores <span className="pull-right"><b className="caret">
+		 			</b></span></span>
+				</a>
+				</li>
+				<ul className="nav nav-list collapse" id="submenu">
+					{concursos.map((p,i)=>{
+						return (<li key={i} onClick={()=>this.verConcurso(p.nombre)}>{p.nombre}</li>);
+					})}
+				</ul></div>
+			);
 		}
 		return (<li> {rta}
 		</li>);
 	}
 
+	verConcurso(nombre){
+		this.props.verConcurso(nombre);
+	}
 	verConcursoDia(){
-		console.log("concurso del dia");
 		this.props.verConcursoDia();
 	}
 	participar(){
-		console.log("heosdkm");
 		this.props.participar();
 	}
 
 	verDibujos(){
-		console.log("ver Dibujos");
 		this.props.verDibujos();
 	}
 	cerrarSesion(){
-		console.log("cerrarSesion");
 		this.props.cerrarSesion();
 	}
 
