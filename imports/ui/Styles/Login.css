@@ -1,3 +1,44 @@
 .Login{
-	text-align: right;
+	position: fixed;
+    top:0;  
+    right: 0;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+	z-index: 9999;
+	border-color: #000;
+	border-style: groove;
+	border-right: none;
+	border-top: none;
+	background-color: #fff;
+}
+
+#login-buttons .login-text-and-button #login-buttons-google{
+	background-color: #fff !important;
+	border: none !important;
+}
+
+#login-buttons .login-text-and-button #login-buttons-google #login-buttons-image-google{
+	display: none;
+}
+
+#login-buttons .login-text-and-button #login-buttons-google .text-besides-image.sign-in-text-google{
+    font-family: "Shadows Into Light" !important; 
+	color: #000002 !important;
+	font-size: 1rem;
+	letter-spacing: 0.2rem;
+}
+
+#login-buttons .login-text-and-button .login-display-name{
+    font-family: "Shadows Into Light" !important; 
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+}
+
+#login-buttons .login-text-and-button #login-buttons-logout{
+    font-family: "Shadows Into Light" !important; 
+	font-size: 1rem;    
+	background-color: #2E86C1;
+	border:none;
 }

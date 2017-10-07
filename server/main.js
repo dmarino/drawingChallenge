@@ -18,6 +18,16 @@ if(Meteor.isServer){
             //return parser.text('every 1 minutes');
         }, 
         job: function(intendedAt) {
+            //agregar ganador
+            
+            var concurso = Concurso.find({}, { sort: { fecha: -1 } }).limit(1).fetch();
+            var dibujo = Dibujos.find({"concurso":concurso.nombre}, { sort: { likes: -1 } }).limit(1).fetch();
+
+            Concurso.update(concurso._id, {
+                $set: { ganador: dibujo},
+            });
+
+            //cambiar tema concurso            
         	var tema = Temas.find({}).fetch()[0]; 
         	var personaje = tema.personajes[Math.floor(Math.random()*(tema.personajes.length-1))].nombre;
         	var caracteristica = tema.caracteristicas[Math.floor(Math.random()*(tema.caracteristicas.length-1))].nombre;

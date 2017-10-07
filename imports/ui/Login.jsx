@@ -11,13 +11,9 @@ class Login extends Component{
 	render(){
 		return (
 			<div className="Login">
-				<nav className="navbar fixed-top navbar-light bg-light">
-				  <a className="navbar-brand" href="#">Drawing Challenge</a>
-				  <div id="derecha">
-				  	<AccountsUIWrapper></AccountsUIWrapper>
-				  </div>
-				</nav>
-			</div>);
+				<AccountsUIWrapper></AccountsUIWrapper>
+			</div>
+		);
 	}
 }
 

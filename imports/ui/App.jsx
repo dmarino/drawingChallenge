@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+
 import {createContainer} from "meteor/react-meteor-data";
+
 import "./Styles/App.css";
 import Login from "./Login.jsx";
 import Principal from "./Principal.jsx";
@@ -116,14 +118,13 @@ class App extends Component{
 		return (
 			<div className="App">
 				<Login></Login>
-				<div className="espacio"></div>
 				<Menu_lateral concursos={this.props.concursos} user={this.props.currentUser}
 					participar={this.participar.bind(this)}
 					verDibujos={this.verDibujos.bind(this)}
 					verConcursoDia={this.verConcursoDia.bind(this)}
 					verConcurso={this.verConcurso.bind(this)}></Menu_lateral>
 				{!this.state.dibujando ? 
-					<Principal concursos={this.props.concursos} misDibujos={this.state.misDibujos}
+					<Principal onScroll = {this.ocultar} concursos={this.props.concursos} misDibujos={this.state.misDibujos}
 								misDibujosActivos={this.state.misDibujosActivos}
 									dibujos = {dibujos}
 									anteriorConcurso = {this.state.antConcurso}></Principal>:

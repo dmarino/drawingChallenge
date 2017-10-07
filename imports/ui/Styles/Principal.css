@@ -1,7 +1,6 @@
 .Banner{
   height: 8rem;
-  background-image: url("https://about.canva.com/es_co/wp-content/uploads/sites/3/2015/02/Etsy-Banners.png");
-  -webkit-background-size: contain;
+  background-image: url("./../images/banner.png");
 }
 #asd{
 	height: 500rem;
