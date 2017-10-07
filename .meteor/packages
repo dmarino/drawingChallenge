@@ -22,5 +22,6 @@ react-meteor-data
 percolate:synced-cron
 accounts-ui
 facebook-config-ui
-accounts-facebook
 insecure
+accounts-google
+google-config-ui

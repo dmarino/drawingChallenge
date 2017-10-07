@@ -5,6 +5,7 @@ import "./Styles/App.css";
 import Login from "./Login.jsx";
 import Principal from "./Principal.jsx";
 import Dibujo from "./Dibujo.jsx";
+import { Meteor } from 'meteor/meteor';
 import Menu_lateral from "./Menu_lateral.jsx";
 
 import {Usuarios} from "../api/usuarios.js";
@@ -102,6 +103,7 @@ class App extends Component{
 	}
 
 	render(){
+		console.log(Meteor.user());
 		var dibujos;
 		if(this.props.concursos.length!==0){
 			dibujos = Dibujos.find({concurso:this.props.concursos[0].nombre}).fetch();
