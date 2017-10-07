@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import "./Styles/Login.css";
+import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
 
 class Login extends Component{
 	constructor(props){
@@ -26,6 +27,9 @@ class Login extends Component{
 				<nav className="navbar fixed-top navbar-light bg-light">
 				  <a className="navbar-brand" href="#">Drawing Challenge</a>
 				  {login}
+				  <div id="derecha">
+				  	<AccountsUIWrapper></AccountsUIWrapper>
+				  </div>
 				  <button className="navbar-toggler" type="button" data-toggle="collapse" 
 				  data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" 
 				  aria-label="Toggle navigation"
@@ -39,6 +43,9 @@ class Login extends Component{
 				      </li>
 				      <li className="nav-item active">
 				        <a className="nav-link" href="#">Iniciar Sesion</a>
+				      </li>
+				      <li className="nav-item active">
+				        <AccountsUIWrapper></AccountsUIWrapper>
 				      </li>
 				      <li className="nav-item">
 				        <a className="nav-link" href="#">Nosotros</a>

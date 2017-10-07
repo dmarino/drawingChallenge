@@ -20,6 +20,7 @@ class App extends Component{
 			currentUser:null,
 			currentDibujo:{},
 			dibujando:false,
+			misDibujosActivos:false,
 			misDibujos:[]
 		};
 	}
@@ -53,6 +54,7 @@ class App extends Component{
 		this.setState({
 		    dibujando:dibujar,
 		    currentDibujo: dibujo,
+		    misDibujosActivos:false,
 			misDibujos:[]		
         });
 	}
@@ -61,14 +63,16 @@ class App extends Component{
 		console.log(":D");
 		this.setState({
 			dibujando:false,
+			misDibujosActivos:false,
 			misDibujos:[]
 		});
 	}
 
 	verDibujos(){
-		var dibujos = Dibujos.find({"dibujos.autor":currentUser});
+		var dibujos = Dibujos.find({"autor":this.state.currentUser}).fetch();
 		this.setState({
 			dibujando:false,
+			misDibujosActivos:true,
 			misDibujos:dibujos
 		})
 	}
@@ -77,6 +81,7 @@ class App extends Component{
 		this.setState({
 			dibujando:false,
 			currentUser:null,
+			misDibujosActivos:false,
 			misDibujos:[]
 		});
 	}
@@ -93,7 +98,7 @@ class App extends Component{
 					verConcursoDia={this.verConcursoDia.bind(this)}></Menu_lateral>
 				{!this.state.dibujando ? 
 					<Principal concursos={this.props.concursos} misDibujos={this.state.misDibujos}
-								></Principal>:
+								misDibujosActivos={this.state.misDibujosActivos}></Principal>:
 					<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
 				}
 			</div>);
@@ -108,6 +113,7 @@ App.PropTypes={
 export default createContainer(()=>{
 	return{
 		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch(),
-		usuarios: Usuarios.find({}).fetch()
+		usuarios: Usuarios.find({}).fetch(),
+		concursoDia: Concurso.find().fetch()
 	};
 },App);

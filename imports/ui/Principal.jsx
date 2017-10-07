@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import "./Styles/Principal.css";
+import CanvasT from "./CanvasT.jsx";
 
 class Principal extends Component{
 	constructor(props){
@@ -10,8 +11,8 @@ class Principal extends Component{
 	content(){
 		var concursos = this.props.concursos;
 		var rta;
-		if(this.props.misDibujos.length!==0){
-			console.log("misDibujos");
+		if(this.props.misDibujosActivos){
+			rta = "No tiene dibujos para mostrar";
 		}
 		else{
 			if(concursos.length===0)
@@ -34,7 +35,12 @@ class Principal extends Component{
 					<div className="col-sm-12 cuerpo">
 						<div className="Banner">
 						</div>
-						<div>{this.content()}</div>
+						<div>{
+							this.props.misDibujos.length!==0 ? 
+							this.props.misDibujos.map((p)=>{
+								<CanvasT dibujo = {p}></CanvasT>;
+							}) : this.content()
+						}</div>
 						<div id="asd"></div>
 					</div>
 				</div>
