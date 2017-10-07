@@ -1,13 +1,20 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-//import "./Styles/CanvasT.css";
+import "./Styles/CanvasT.css";
 
 class CanvasT extends Component{
 	constructor(props){
 		super(props);
 	}
 
-	
+	componentDidMount(){
+		this.redraw();
+	}
+
+	componentWillUpdate(){
+		this.redraw();
+	}
+
 
 	redraw() {
 		console.log("llega");
@@ -31,14 +38,16 @@ class CanvasT extends Component{
 	render(){
 		console.log("al menos al render");
 		return (
-			<div className="CanvasT">
-				<canvas 
-						width="500"
-						height="500"
-						ref={(c)=>this.canvas=c}
-						></canvas>
-				{this.redraw()}
-			</div>);
+				<div className="col-sm-6 CanvasT">
+				{this.props.tema?
+					<span>Tema: {this.props.dibujo.concurso}</span>:<span>Autor: {this.props.dibujo.autor}</span>
+				}	<br/> <span>likes: {this.props.dibujo.likes}</span>
+					<canvas 
+							width="500"
+							height="500"
+							ref={(c)=>this.canvas=c}
+							></canvas>
+				</div>);
 	}
 }
 

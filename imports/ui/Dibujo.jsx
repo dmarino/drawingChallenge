@@ -99,9 +99,10 @@ class Dibujo extends Component{
 
 
     render(){
+        console.log(this.props.dibujo);
         return (
             <div id="dibujoContenedor">
-            <h1>TEMA: DRAGON CYBORG</h1>
+            <h1>TEMA: {this.props.dibujo.concurso}</h1>
             <div className="row">
                 <div className="col-md-8">
                     <canvas id="canvas" width="500" height="500" onMouseDown={this.mouseDown} onMouseMove={this.mouseMove} onMouseUp ={this.mouseUp} onMouseLeave={this.mouseLeave} ref={(c) => this.canvas = c}>

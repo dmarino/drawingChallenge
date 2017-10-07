@@ -1,3 +1,7 @@
 .espacio{
 	height: 3.5rem;
 }
+
+canvas{
+	border: 5px solid skyblue;
+}

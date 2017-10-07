@@ -19,13 +19,27 @@ class Principal extends Component{
 				rta="No existen concursos para mostrar";
 			else{
 				console.log(concursos);
-				concursos.forEach((p)=>{
-					console.log(p);
-				});
-				rta="Existe algo";
+				concursos = concursos[0];
+				console.log(concursos);
+				rta = "concurso";
 			}
 		}
-		return rta;
+		if(rta!=="concurso"){
+			return rta;
+		}
+		else{
+			console.log(this.props.dibujos);
+			return (
+				<div>
+					<span>{concursos.nombre}</span>
+				<div className="feedInicio row">
+						{this.props.dibujos.map((p,i)=>{
+							return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+						})}
+				</div>
+				</div>
+			);
+		}
 	}
 
 	render(){
@@ -37,8 +51,8 @@ class Principal extends Component{
 						</div>
 						<div>{
 							this.props.misDibujos.length!==0 ? 
-							this.props.misDibujos.map((p)=>{
-								<CanvasT dibujo = {p}></CanvasT>;
+							this.props.misDibujos.map((p,i)=>{
+								return <CanvasT dibujo={p} key={i}></CanvasT>;
 							}) : this.content()
 						}</div>
 						<div id="asd"></div>

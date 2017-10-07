@@ -87,6 +87,10 @@ class App extends Component{
 	}
 
 	render(){
+		var dibujos;
+		if(this.props.concursos.length!==0){
+			dibujos = Dibujos.find({concurso:this.props.concursos[0].nombre}).fetch();
+		}
 		return (
 			<div className="App">
 				<Login onClick = {this.usuario} user={this.state.currentUser}></Login>
@@ -98,7 +102,8 @@ class App extends Component{
 					verConcursoDia={this.verConcursoDia.bind(this)}></Menu_lateral>
 				{!this.state.dibujando ? 
 					<Principal concursos={this.props.concursos} misDibujos={this.state.misDibujos}
-								misDibujosActivos={this.state.misDibujosActivos}></Principal>:
+								misDibujosActivos={this.state.misDibujosActivos}
+									dibujos = {dibujos}></Principal>:
 					<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
 				}
 			</div>);
