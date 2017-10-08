@@ -29,3 +29,29 @@
 	width: 10%;
 	height: auto;
 }
+
+
+.CanvasT button{
+	padding-right: 4%;
+	padding-left: 4%;	
+	padding-top: 2%;
+	padding-bottom: 2%;	
+	background-color: #fff;
+	background-image: url("./images/mancha.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;	
+	color: #fff;
+	letter-spacing: 0.3rem;
+	border:none;
+}
+
+.CanvasT button:hover{
+	background-image: url("./images/mancha2.png");
+	font-weight: bold;
+    background-size: 100% 100%;	
+}
+
+.CanvasT button:focus{
+	outline: none;
+}
+

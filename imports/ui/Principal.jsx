@@ -102,7 +102,7 @@ class Principal extends Component{
 				    <div id="info">
 				        <span>{concurso.nombre}</span>
 					    {this.props.user?
-					        <button onClick={()=>this.participar()}>Participar</button>
+					        <button onClick={()=>this.participar()}>Draw</button>
 					    :
 					        null
 					    }
@@ -119,7 +119,7 @@ class Principal extends Component{
 	render(){
 		return (
 			<div className="Principal">
-				<div>
+				<div className="misDibujos">
 				   {this.props.misDibujos.length!==0 ? 
 					    this.props.misDibujos.map((p,i)=>{
 						    return <CanvasT dibujo={p} key={i} tema={true} like={false}></CanvasT>;
