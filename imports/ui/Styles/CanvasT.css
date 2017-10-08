@@ -6,13 +6,12 @@
 	margin-right: 2rem;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
-	padding: 0.5rem;
-}
+	padding: 0.5rem;}
 
 
 .CanvasT canvas{
-    width: 300px;  
-    height: 300px;      
+    width: 350px;
+    height: 350px;     
 }
 
 .CanvasT:hover{
@@ -20,7 +19,7 @@
 }
 
 .CanvasT .container {
-	max-width: 300px;
+	max-width: 350px;
 	text-align: center;
 }
 
