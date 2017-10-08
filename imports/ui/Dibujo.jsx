@@ -13,6 +13,7 @@ class Dibujo extends Component{
         this.state={
             puntos:[],
             paint:false,
+            inicio: true,
             color:"#000000"
         };    
     }
@@ -21,6 +22,13 @@ class Dibujo extends Component{
         this.forceUpdate();
     }
     componentWillUpdate(){
+        if(this.state.inicio){
+            this.setState({
+                puntos:this.props.dibujo.dibujo,
+                inicio:false
+            })
+        }
+
         this.redraw();
     }
 
@@ -30,8 +38,8 @@ class Dibujo extends Component{
 
     mouseDown = (e) => {
         var d = ReactDOM.findDOMNode(this).getBoundingClientRect();
-        var mouseX = e.pageX - 130;
-        var mouseY = e.pageY - 105;
+        var mouseX = e.pageX - 150;
+        var mouseY = e.pageY - 290;
 
 
         this.setState({
@@ -44,8 +52,8 @@ class Dibujo extends Component{
     mouseMove = (e) => {    
         if(this.state.paint){
             var d = ReactDOM.findDOMNode(this).getBoundingClientRect(); 
-            var mouseX = e.pageX - 130;
-            var mouseY = e.pageY - 105;
+            var mouseX = e.pageX - 150;
+            var mouseY = e.pageY - 290;
 
             this.addPunto(mouseX, mouseY, true);
         }   
@@ -55,17 +63,31 @@ class Dibujo extends Component{
         this.setState({
             paint:false
         })
+        this.save();      
     }    
 
     mouseLeave = (e) => {
         this.setState({
             paint:false
         })
+
+        this.save();
     }   
 
+    save = () =>{
+        var puntosT = this.state.puntos;
+        Dibujos.update(this.props.dibujo._id, {
+            $set: { dibujo: puntosT},
+        });
+
+        this.setState({
+            inicio:true
+        })
+
+    }
 
     addPunto = (xP,yP,draggingP) => {
-        var puntosT = this.props.dibujo.dibujo;
+        var puntosT = this.state.puntos;
         puntosT.push({
             x:xP,
             y:yP,
@@ -73,25 +95,25 @@ class Dibujo extends Component{
             color:this.state.color
         });
 
-        Dibujos.update(this.props.dibujo._id, {
-            $set: { dibujo: puntosT},
-        });
+        this.setState({
+            puntos:puntosT
+        })       
     }
 
     redraw() {
         let ctx = this.canvas.getContext("2d");
         ctx.clearRect(0, 0, 500, 500);
 
-        for(var i=0; i < this.props.dibujo.dibujo.length; i++) {  
+        for(var i=0; i < this.state.puntos.length; i++) {  
             ctx.beginPath();
-            if(this.props.dibujo.dibujo[i].dragging && i){
-                ctx.moveTo(this.props.dibujo.dibujo[i-1].x, this.props.dibujo.dibujo[i-1].y);
+            if(this.state.puntos[i].dragging && i){
+                ctx.moveTo(this.state.puntos[i-1].x, this.state.puntos[i-1].y);
             }else{
-                ctx.moveTo(this.props.dibujo.dibujo[i].x-1, this.props.dibujo.dibujo[i].y);
+                ctx.moveTo(this.state.puntos[i].x-1, this.state.puntos[i].y);
             }
-            ctx.lineTo(this.props.dibujo.dibujo[i].x, this.props.dibujo.dibujo[i].y);
+            ctx.lineTo(this.state.puntos[i].x, this.state.puntos[i].y);
             ctx.closePath();
-            ctx.strokeStyle = this.props.dibujo.dibujo[i].color;
+            ctx.strokeStyle = this.state.puntos[i].color;
             ctx.stroke();
         }
     }

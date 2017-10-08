@@ -100,7 +100,7 @@ class Principal extends Component{
 				<div>
 				   {this.props.misDibujos.length!==0 ? 
 					    this.props.misDibujos.map((p,i)=>{
-						    return <CanvasT dibujo={p} key={i} tema={true} tema={false}></CanvasT>;
+						    return <CanvasT dibujo={p} key={i} tema={true} like={false}></CanvasT>;
 					    }) 
 				   : 
 				        this.content()

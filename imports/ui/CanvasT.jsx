@@ -24,6 +24,7 @@ class CanvasT extends Component{
 	    Dibujos.update(this.props.dibujo._id, {
             $set: { likes:num},
         });
+        this.forceUpdate();
 	}
 
 	redraw() {
