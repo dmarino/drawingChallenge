@@ -1,7 +1,31 @@
-canvas{
-	padding: 1rem;
+.CanvasT {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+	display: inline-block;  
+	margin-left: 2rem;
+	margin-right: 2rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	padding: 0.5rem;
 }
-.canvasT{
-	display: inline-block;
-	padding-left: 1rem;
+
+
+.CanvasT canvas{
+    width: 300px;  
+    height: 300px;      
+}
+
+.CanvasT:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.CanvasT .container {
+	max-width: 300px;
+	text-align: center;
+}
+
+.CanvasT .container img{
+	float: right;
+	width: 10%;
+	height: auto;
 }

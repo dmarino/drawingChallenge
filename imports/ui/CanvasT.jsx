@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./Styles/CanvasT.css";
 
 class CanvasT extends Component{
+
 	constructor(props){
 		super(props);
 	}
@@ -14,7 +15,6 @@ class CanvasT extends Component{
 	componentWillUpdate(){
 		this.redraw();
 	}
-
 
 	redraw() {
         let ctx = this.canvas.getContext("2d");
@@ -36,16 +36,22 @@ class CanvasT extends Component{
 
 	render(){
 		return (
-				<div className="col-sm-6 CanvasT">
-				{this.props.tema?
-					<span>Tema: {this.props.dibujo.concurso}</span>:<span>Autor: {this.props.dibujo.autor}</span>
-				}	<br/> <span>likes: {this.props.dibujo.likes}</span>
-					<canvas 
-							width="500"
-							height="500"
-							ref={(c)=>this.canvas=c}
-							></canvas>
-				</div>);
+		    <div className="CanvasT">
+			    <canvas 
+				    ref={(c)=>this.canvas=c}
+			    >
+			    </canvas>
+                <div className="container">
+			        {this.props.tema ?
+					    <h4><b>{this.props.dibujo.concurso}</b></h4> 
+				    :
+					    <h4><b>{this.props.dibujo.autor}</b></h4> 				
+				    }            
+                    <p>likes: {this.props.dibujo.likes}</p> 
+                    <img src="./images/like.png"/>
+                </div>					
+			</div>
+		);
 	}
 }
 

@@ -43,11 +43,9 @@ class Principal extends Component{
 			return (
 				<div>
 					<h1>{concursos.nombre}</h1>
-				<div className="feedInicio row">
-						{this.props.dibujos.map((p,i)=>{
-							return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
-						})}
-				</div>
+					{this.props.dibujos.map((p,i)=>{
+						return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+					})}
 				</div>
 			);
 		}
@@ -59,7 +57,7 @@ class Principal extends Component{
 				<div>{
 					this.props.misDibujos.length!==0 ? 
 					this.props.misDibujos.map((p,i)=>{
-						return <CanvasT dibujo={p} key={i}></CanvasT>;
+						return <CanvasT dibujo={p} key={i} tema={true}></CanvasT>;
 					}) : this.content()
 				}</div>
 			</div>
