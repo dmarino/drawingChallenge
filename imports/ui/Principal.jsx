@@ -78,7 +78,7 @@ class Principal extends Component{
 						    {this.state.dibujosConcurso.length !== 0 ?
 						        <div>
 					                {this.state.dibujosConcurso.map((p,i)=>{
-						                return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+						                return <CanvasT dibujo={p} key={i} tema={false} like={false}></CanvasT>;
 					                })}	
 					            </div>				        
 						    :
@@ -104,7 +104,7 @@ class Principal extends Component{
 					    null
 					}
 					{this.props.dibujos.map((p,i)=>{
-						return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+						return <CanvasT dibujo={p} key={i} tema={false} like={true}></CanvasT>;
 					})}
 				</div>
 			);
@@ -117,7 +117,7 @@ class Principal extends Component{
 				<div>
 				   {this.props.misDibujos.length!==0 ? 
 					    this.props.misDibujos.map((p,i)=>{
-						    return <CanvasT dibujo={p} key={i} tema={true}></CanvasT>;
+						    return <CanvasT dibujo={p} key={i} tema={true} tema={false}></CanvasT>;
 					    }) 
 				   : 
 				        this.content()
