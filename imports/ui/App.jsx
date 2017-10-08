@@ -130,7 +130,7 @@ class App extends Component{
 				>
 			    </Menu_lateral>
 				{!this.state.dibujando ? 
-				    <div>
+				    <div id="contenido">
 					    <Principal 
 					        concursos={this.props.concursos} 
 				            user={this.props.currentUser}					        

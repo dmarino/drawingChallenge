@@ -10,7 +10,6 @@
 	padding-left: 1rem;
 }
 
-
 .concursoDia{
 	text-align: center;
 }
@@ -50,4 +49,34 @@
 .misDibujos{
 	padding-top: 2rem;
 	text-align: center;
+}
+
+.anteriores {
+	padding-left: 3%;
+	padding-right: 3%;
+	padding-bottom: 4%;	
+}
+
+.anteriores .item{
+    display: block;
+}
+
+.anteriores select{
+	float: right;
+	font-size: 1.5rem;
+}
+
+.anteriores select:focus{
+	outline: none;
+}
+
+.anteriores #actual h1{
+	clear: right;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+	font-size: 4rem;
+}
+
+.anteriores #actual p{
+	font-size: 1rem;
 }

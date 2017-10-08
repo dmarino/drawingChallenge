@@ -66,16 +66,19 @@ class Principal extends Component{
 		if(rta === "Anterior Concurso"){
 			concursos = concursos.slice(0);
 			concursos.shift();
+		    fecha = this.state.concursoActual.fecha.getDate() + "/" + (this.state.concursoActual.fecha.getMonth()+1) + "/" +  this.state.concursoActual.fecha.getFullYear();			
 			return (
-				<div>
-				    <select onChange={this.handleChange}>
+				<div className="anteriores">
+				    <select className="item" onChange={this.handleChange}>
 					    {concursos.map((p,i)=>{
 						    return <option key={i} value={i}> {p.nombre}</option>;
 					    })}				        
 				    </select>
 				    {this.state.concursoActual!==null && this.state.concursoActual !== undefined ?
-				        <div>
+				        <div className="item" id="actual">
 						    <h1>{this.state.concursoActual.nombre}</h1>
+						    <h5>Ganador: {this.state.concursoActual.ganador.autor}</h5>
+						    <p>{fecha}</p>
 						    {this.state.dibujosConcurso.length !== 0 ?
 						        <div>
 					                {this.state.dibujosConcurso.map((p,i)=>{
