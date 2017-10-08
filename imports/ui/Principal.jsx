@@ -8,6 +8,10 @@ class Principal extends Component{
 		super(props);
 	}
 
+	participar(){
+		this.props.participar();
+	}	
+
 	content(){
 		var concursos = this.props.concursos;
 		var rta;
@@ -43,6 +47,11 @@ class Principal extends Component{
 			return (
 				<div>
 					<h1>{concursos.nombre}</h1>
+					{this.props.user?
+					    <div><button onClick={()=>this.participar()}>Participar</button></div>
+					:
+					    null
+					}
 					{this.props.dibujos.map((p,i)=>{
 						return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
 					})}

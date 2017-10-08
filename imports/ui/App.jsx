@@ -132,10 +132,13 @@ class App extends Component{
 				    <div>
 					    <Principal 
 					        concursos={this.props.concursos} 
+				            user={this.props.currentUser}					        
 					        misDibujos={this.state.misDibujos}
 						    misDibujosActivos={this.state.misDibujosActivos}
 							dibujos = {dibujos}
-							anteriorConcurso = {this.state.antConcurso}>
+							anteriorConcurso = {this.state.antConcurso}
+							participar = {this.participar.bind(this)}
+						>							
 						</Principal>			         	
 				    </div>
 					:
