@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
 import { SketchPicker } from 'react-color';
+import { Meteor } from 'meteor/meteor';
 
 import PropTypes from "prop-types";
 import "./Styles/Dibujo.css";
@@ -76,9 +77,10 @@ class Dibujo extends Component{
 
     save = () =>{
         var puntosT = this.state.puntos;
-        Dibujos.update(this.props.dibujo._id, {
-            $set: { dibujo: puntosT},
-        });
+
+        var idForServer=this.props.dibujo._id;
+        var dataForServer={dibujo: puntosT};
+        Meteor.call("dibujos.update", idForServer, dataForServer);
 
         this.setState({
             inicio:true

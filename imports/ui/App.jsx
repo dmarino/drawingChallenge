@@ -10,7 +10,6 @@ import Dibujo from "./Dibujo.jsx";
 import { Meteor } from 'meteor/meteor';
 import Menu_lateral from "./Menu_lateral.jsx";
 
-import {Usuarios} from "../api/usuarios.js";
 import {Concurso} from "../api/concurso.js";
 import {Dibujos} from "../api/dibujos.js";
 
@@ -52,13 +51,14 @@ class App extends Component{
 
 		var dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":Meteor.user().profile.name}).fetch()[0];
 		if(!dibujo){
-		    Dibujos.insert({
+			var datosForServer = {
 		        autor: Meteor.user().profile.name, 
 		        concurso: this.state.currentConcurso.nombre,
 		        editado: new Date(),
 		        likes : 0,
 		        dibujo:[]
-		    });
+		    };
+		    Meteor.call("dibujos.insertar", datosForServer);
 		    dibujo = Dibujos.find({"concurso":this.state.currentConcurso.nombre,"autor":Meteor.user().profile.name}).fetch()[0];
 		}
 
@@ -153,16 +153,16 @@ class App extends Component{
 
 App.PropTypes={
     concursos: PropTypes.array.isRequired,
-    usuarios: PropTypes.array.isRequired,
-    concursoDia: PropTypes.array.isRequired,
     currentUser: PropTypes.object
 };
 
 export default createContainer(()=>{
+	Meteor.subscribe('concursos');
+	Meteor.subscribe('dibujos');
+	Meteor.subscribe('temas');
+
 	return{
 		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch(),
-		usuarios: Usuarios.find({}).fetch(),
-		concursoDia: Concurso.find().fetch(),
 		currentUser: Meteor.user()
 	};
 },App);

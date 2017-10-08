@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import "./Styles/CanvasT.css";
+import { Meteor } from 'meteor/meteor';
 
 
 import {Dibujos} from "../api/dibujos.js";
@@ -33,9 +34,7 @@ class CanvasT extends Component{
 
 	like(){
 	    var num = this.props.dibujo.likes+1;
-	    Dibujos.update(this.props.dibujo._id, {
-            $set: { likes:num},
-        });
+	    Meteor.call("dibujos.updateLikes",this.props.dibujo._id,num);
 
         this.forceUpdate();
 
