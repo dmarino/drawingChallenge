@@ -19,8 +19,24 @@ class Principal extends Component{
 		this.props.participar();
 	}	
 
+	componentWillUpdate(){
+		if(this.props.concursos !== null && this.props.concursos !== undefined && this.props.concursos.length!==0){
+			var tempo = this.props.concursos[1];
+		    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}).fetch();
+		    if(this.state.concursoActual !== tempo){
+			    this.setState({
+			        concursoActual: tempo,
+			        dibujosConcurso:tempoDibujos
+			    });
+			}
+		}
+	}
+
 	handleChange = (event) =>{
-	    var tempo = this.props.concursos[event.target.value];
+		var indice = event.target.value;
+		indice = parseInt(indice);
+		indice += 1;
+	    var tempo = this.props.concursos[indice];
 	    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}).fetch();
 
 	    this.setState({
@@ -47,14 +63,16 @@ class Principal extends Component{
 			}
 		}
 		if(rta === "Anterior Concurso"){
+			concursos = concursos.slice(0);
+			concursos.shift();
 			return (
 				<div>
 				    <select onChange={this.handleChange}>
-					    {this.props.concursos.map((p,i)=>{
+					    {concursos.map((p,i)=>{
 						    return <option key={i} value={i}> {p.nombre}</option>;
 					    })}				        
 				    </select>
-				    {this.state.concursoActual!==null ?
+				    {this.state.concursoActual!==null && this.state.concursoActual !== undefined ?
 				        <div>
 						    <h1>{this.state.concursoActual.nombre}</h1>
 						    {this.state.dibujosConcurso.length !== 0 ?
@@ -70,7 +88,6 @@ class Principal extends Component{
 					:
 					    null
 					}
-
 				</div>
 			);
 		}
