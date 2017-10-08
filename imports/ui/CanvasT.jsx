@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import "./Styles/CanvasT.css";
 
+
+import {Dibujos} from "../api/dibujos.js";
+
 class CanvasT extends Component{
 
 	constructor(props){
@@ -14,6 +17,13 @@ class CanvasT extends Component{
 
 	componentWillUpdate(){
 		this.redraw();
+	}
+
+	like(){
+	    var num = this.props.dibujo.likes+1;
+	    Dibujos.update(this.props.dibujo._id, {
+            $set: { likes:num},
+        });
 	}
 
 	redraw() {
@@ -48,7 +58,11 @@ class CanvasT extends Component{
 					    <h4><b>{this.props.dibujo.autor}</b></h4> 				
 				    }            
                     <p>likes: {this.props.dibujo.likes}</p> 
-                    <img src="./images/like.png"/>
+                    {this.props.like ?
+                        <button onClick={()=>this.like()} >Like</button>
+                    :
+                        null
+                    }
                 </div>					
 			</div>
 		);
