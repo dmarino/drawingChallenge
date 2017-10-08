@@ -17,6 +17,7 @@ class Principal extends Component{
 
 	participar(){
 		this.props.participar();
+		console.log(this.props.concursos[0].fecha);
 	}	
 
 	componentWillUpdate(){
@@ -95,14 +96,18 @@ class Principal extends Component{
 			return rta;
 		}
 		else{
+		    fecha = concurso.fecha.getDate() + "/" + (concurso.fecha.getMonth()+1) + "/" +  concurso.fecha.getFullYear();
 			return (
-				<div>
-					<h1>{concurso.nombre}</h1>
-					{this.props.user?
-					    <div><button onClick={()=>this.participar()}>Participar</button></div>
-					:
-					    null
-					}
+				<div className="concursoDia">
+				    <div id="info">
+				        <span>{concurso.nombre}</span>
+					    {this.props.user?
+					        <button onClick={()=>this.participar()}>Participar</button>
+					    :
+					        null
+					    }
+					    <p><span> Fecha: </span> <span>{fecha}</span></p>
+				    </div>
 					{this.props.dibujos.map((p,i)=>{
 						return <CanvasT dibujo={p} key={i} tema={false} like={true}></CanvasT>;
 					})}

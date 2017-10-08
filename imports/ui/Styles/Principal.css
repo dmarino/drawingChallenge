@@ -1,10 +1,6 @@
 .Principal{
 	padding-top: 1rem;
-}
-
-.Principal h1{
-	text-align: center;
-	padding-bottom: 1rem;
+	padding-bottom: 1rem;	
 }
 
 .cuerpo{
@@ -12,4 +8,39 @@
 }
 .feedInicio{
 	padding-left: 1rem;
+}
+
+.concursoDia{
+	text-align: center;
+}
+
+.concursoDia #info button{
+	padding: 2%;
+	padding-top: 3%;
+	background-color: #fff;
+	background-image: url("./images/mancha.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;	
+	color: #fff;
+	letter-spacing: 0.3rem;
+	border:none;
+}
+
+.concursoDia #info button:hover{
+	background-image: url("./images/mancha2.png");
+    background-size: 100% 100%;	
+}
+
+.concursoDia #info button:focus{
+	outline: none;
+}
+
+
+
+.concursoDia #info > span{
+	font-size: 4rem;
+}
+
+.concursoDia #info p span{
+	font-size: 1rem;
 }

@@ -1,7 +1,14 @@
 .Menu_lateral{
 	background-color: #fff;
 	width: 100%;
-	font-size: 24px;	
+	font-size: 24px;
+	padding-top: 0px;
+	padding-bottom: 1%;
+
+	border-bottom: 15px solid transparent;
+    -webkit-border-image: url("./images/borde.png") 22 round; /* Safari 3.1-5 */
+    -o-border-image: url("./images/borde.png") 22 round; /* Opera 11-12.1 */
+    border-image: url("./images/borde.png") 22 round;	
 }
 
 .Menu_lateral .columna{
