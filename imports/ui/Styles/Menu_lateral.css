@@ -1,32 +1,20 @@
-.sidebar{
+.Menu_lateral{
+	background-color: #fff;
+	width: 100%;
+	font-size: 1.5rem;	
+}
+
+.Menu_lateral .columna{
+	margin: 0px !important;
+	padding: 0px !important;	
+}
+
+.Menu_lateral .menuItem{	
+	width: 100%;	
 	text-align: center;
-	padding-top: 2rem;
-	}
-.static{
-	width: 7rem;
-	position: fixed;
-	text-align: left;
-	background-color: #54D1B0;
-	height: 100%;
-	z-index: 10;
-}
-.static .list{
-	list-style-type:none;
-	padding-left: 1.3rem;
-	width: 5.9rem;
-}
-.static li{
-	padding-top: 0.8rem;
-	font-size: 1.2rem;
-}
-.menuLateral{
-	width:8rem;
+	color: #000;
 }
 
-.nav.nav-list.collapse{
-	visibility: collapse;
-}
-
-.nav.nav-list.collapse.show{
-	visibility: visible;
+.Menu_lateral .menuItem:hover{	
+	text-decoration: underline;
 }

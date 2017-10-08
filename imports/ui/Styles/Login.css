@@ -12,6 +12,8 @@
 	border-right: none;
 	border-top: none;
 	background-color: #fff;
+	color: #000;
+	font-family: "Shadows Into Light"; 
 }
 
 #login-buttons .login-text-and-button #login-buttons-google{

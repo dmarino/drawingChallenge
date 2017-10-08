@@ -42,7 +42,7 @@ class Principal extends Component{
 		else{
 			return (
 				<div>
-					<span>{concursos.nombre}</span>
+					<h1>{concursos.nombre}</h1>
 				<div className="feedInicio row">
 						{this.props.dibujos.map((p,i)=>{
 							return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
@@ -56,20 +56,14 @@ class Principal extends Component{
 	render(){
 		return (
 			<div className="Principal">
-				<div className="row">
-					<div className="col-sm-12 cuerpo">
-						<div className="Banner">
-						</div>
-						<div>{
-							this.props.misDibujos.length!==0 ? 
-							this.props.misDibujos.map((p,i)=>{
-								return <CanvasT dibujo={p} key={i}></CanvasT>;
-							}) : this.content()
-						}</div>
-						<div id="asd"></div>
-					</div>
-				</div>
-			</div>);
+				<div>{
+					this.props.misDibujos.length!==0 ? 
+					this.props.misDibujos.map((p,i)=>{
+						return <CanvasT dibujo={p} key={i}></CanvasT>;
+					}) : this.content()
+				}</div>
+			</div>
+		);
 	}
 }
 

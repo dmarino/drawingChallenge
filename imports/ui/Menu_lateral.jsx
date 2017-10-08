@@ -5,42 +5,14 @@ import "./Styles/Menu_lateral.css";
 class Menu_lateral extends Component{
 	constructor(props){
 		super(props);
-		this.darConcursos = this.darConcursos.bind(this);
 	}
 
-	darConcursos(){
-		var rta;
-		if(this.props.concursos.length!==0){
-			var concursos = this.props.concursos;
-			concursos = concursos.slice(0);
-			concursos.shift();
-			return(
-				<div>
-				<li>
-				<a className="accordion-heading" data-toggle="collapse" data-target="#submenu">
-		 			<span className="nav-header-primary">Concursos Anteriores <span className="pull-right"><b className="caret">
-		 			</b></span></span>
-				</a>
-				</li>
-				<ul className="nav nav-list collapse" id="submenu">
-					{concursos.map((p,i)=>{
-						return (<li key={i} onClick={()=>this.verConcurso(p.nombre)}>{p.nombre}</li>);
-					})}
-				</ul></div>
-			);
-		}
-		return (<li> {rta}
-		</li>);
+	verConcursos(){
+	   console.log("todo");
 	}
 
-	verConcurso(nombre){
-		this.props.verConcurso(nombre);
-	}
 	verConcursoDia(){
 		this.props.verConcursoDia();
-	}
-	participar(){
-		this.props.participar();
 	}
 
 	verDibujos(){
@@ -48,23 +20,32 @@ class Menu_lateral extends Component{
 	}
 
 	render(){
-		var user;
-		var misDibujos;
-		if(this.props.user!==null){
-			user=<li onClick={this.participar.bind(this)}>Participar</li>;
-			misDibujos=<li onClick={()=>this.verDibujos()}>Ver mis dibujos</li>;
-		}
 		return (
 			<div className="Menu_lateral">
-				<div className="static">
-					<ul className="list">
-						<li onClick={()=>this.verConcursoDia()}>Ver Concurso del día</li>
-						{user}
-						{misDibujos}
-						{this.darConcursos()}
-					</ul>
-				</div>
-			</div>);
+			{this.props.user!==null ?
+			    <div className="row">
+			        <div className="col-md-4 col-sm-4 col-lg-4 col-xs-4 columna">  
+				        <div className="menuItem" onClick={()=>this.verConcursoDia()}>Concurso del día</div>
+			        </div>
+			        <div className="col-md-4 col-sm-4 col-lg-4 col-xs-4 columna">  
+				        <div className="menuItem" onClick={()=>this.verDibujos()}>Mis dibujos</div>
+			        </div>
+			        <div className="col-md-4 col-sm-4 col-lg-4 col-xs-4 columna">
+				        <div className="menuItem" onClick={()=>this.verConcursos()}>Concursos Anteriores</div>
+			        </div>			        			        
+			    </div>			    
+			:
+			    <div className="row">
+			        <div className="col-md-6 col-sm-6 col-lg-6 col-xs-6 columna">  
+				        <div className="menuItem" onClick={()=>this.verConcursoDia()}>Concurso del día</div>
+			        </div>
+			        <div className="col-md-6 col-sm-6 col-lg-6 col-xs-6 columna">
+				        <div className="menuItem" onClick={()=>this.verConcursos()}>Concursos Anteriores</div>
+			        </div>			        			        
+			    </div>			
+			}		
+			</div>
+		);
 	}
 }
 

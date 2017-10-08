@@ -118,18 +118,32 @@ class App extends Component{
 		return (
 			<div className="App">
 				<Login></Login>
-				<Menu_lateral concursos={this.props.concursos} user={this.props.currentUser}
-					participar={this.participar.bind(this)}
-					verDibujos={this.verDibujos.bind(this)}
-					verConcursoDia={this.verConcursoDia.bind(this)}
-					verConcurso={this.verConcurso.bind(this)}></Menu_lateral>
+
 				{!this.state.dibujando ? 
-					<Principal onScroll = {this.ocultar} concursos={this.props.concursos} misDibujos={this.state.misDibujos}
-								misDibujosActivos={this.state.misDibujosActivos}
-									dibujos = {dibujos}
-									anteriorConcurso = {this.state.antConcurso}></Principal>:
-					<Dibujo dibujo={this.state.currentDibujo}></Dibujo>
-				}
+				    <div>
+				    	<div id="banner">
+				            <img src="./images/banner.png"/>
+			         	</div>
+			            <Menu_lateral 
+				    	    concursos={this.props.concursos} 
+				    	    user={this.props.currentUser}
+					        verDibujos={this.verDibujos.bind(this)}
+					        verConcursoDia={this.verConcursoDia.bind(this)}
+					        verConcurso={this.verConcurso.bind(this)}>
+					    </Menu_lateral>
+					    <Principal 
+					        concursos={this.props.concursos} 
+					        misDibujos={this.state.misDibujos}
+						    misDibujosActivos={this.state.misDibujosActivos}
+							dibujos = {dibujos}
+							anteriorConcurso = {this.state.antConcurso}>
+						</Principal>			         	
+				    </div>
+					:
+			        <Dibujo 
+					    dibujo={this.state.currentDibujo}>
+				    </Dibujo>
+				}				
 			</div>);
 	}
 }

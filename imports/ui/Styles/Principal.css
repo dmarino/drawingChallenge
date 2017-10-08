@@ -1,10 +1,12 @@
-.Banner{
-  height: 8rem;
-  background-image: url("./../images/banner.png");
+.Principal{
+	padding-top: 1rem;
 }
-#asd{
-	height: 500rem;
+
+.Principal h1{
+	text-align: center;
+	padding-bottom: 1rem;
 }
+
 .cuerpo{
 	padding-left: 7.9rem;
 }
