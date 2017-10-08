@@ -3,14 +3,31 @@ import PropTypes from "prop-types";
 import "./Styles/Principal.css";
 import CanvasT from "./CanvasT.jsx";
 
+import {Dibujos} from "../api/dibujos.js";
+
 class Principal extends Component{
 	constructor(props){
 		super(props);
+
+		this.state={
+		    concursoActual:null,
+		    dibujosConcurso:[]
+		};
 	}
 
 	participar(){
 		this.props.participar();
 	}	
+
+	handleChange = (event) =>{
+	    var tempo = this.props.concursos[event.target.value];
+	    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}).fetch();
+
+	    this.setState({
+	        concursoActual: tempo,
+	        dibujosConcurso:tempoDibujos
+	    });
+	}
 
 	content(){
 		var concursos = this.props.concursos;
@@ -19,24 +36,41 @@ class Principal extends Component{
 			rta = "No tiene dibujos para mostrar";
 		}
 		else{
-			if(this.props.anteriorConcurso.length!==0){
+			if(this.props.anteriorConcurso){
 				rta = "Anterior Concurso";
 			}
 			else if(concursos.length===0)
 				rta="No existen concursos para mostrar";
 			else{
-				concursos = concursos[0];
+				concurso = concursos[0];
 				rta = "concurso";
 			}
 		}
 		if(rta === "Anterior Concurso"){
 			return (
 				<div>
-				<div className="feedInicio row">
-						{this.props.anteriorConcurso.map((p,i)=>{
-							return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
-						})}
-				</div>
+				    <select onChange={this.handleChange}>
+					    {this.props.concursos.map((p,i)=>{
+						    return <option key={i} value={i}> {p.nombre}</option>;
+					    })}				        
+				    </select>
+				    {this.state.concursoActual!==null ?
+				        <div>
+						    <h1>{this.state.concursoActual.nombre}</h1>
+						    {this.state.dibujosConcurso.length !== 0 ?
+						        <div>
+					                {this.state.dibujosConcurso.map((p,i)=>{
+						                return <CanvasT dibujo={p} key={i} tema={false}></CanvasT>;
+					                })}	
+					            </div>				        
+						    :
+						        null
+						    }			        
+				        </div>				    
+					:
+					    null
+					}
+
 				</div>
 			);
 		}
@@ -46,7 +80,7 @@ class Principal extends Component{
 		else{
 			return (
 				<div>
-					<h1>{concursos.nombre}</h1>
+					<h1>{concurso.nombre}</h1>
 					{this.props.user?
 					    <div><button onClick={()=>this.participar()}>Participar</button></div>
 					:
@@ -63,12 +97,15 @@ class Principal extends Component{
 	render(){
 		return (
 			<div className="Principal">
-				<div>{
-					this.props.misDibujos.length!==0 ? 
-					this.props.misDibujos.map((p,i)=>{
-						return <CanvasT dibujo={p} key={i} tema={true}></CanvasT>;
-					}) : this.content()
-				}</div>
+				<div>
+				   {this.props.misDibujos.length!==0 ? 
+					    this.props.misDibujos.map((p,i)=>{
+						    return <CanvasT dibujo={p} key={i} tema={true}></CanvasT>;
+					    }) 
+				   : 
+				        this.content()
+				   }
+				</div>
 			</div>
 		);
 	}

@@ -8,7 +8,7 @@ class Menu_lateral extends Component{
 	}
 
 	verConcursos(){
-	   console.log("todo");
+	   this.props.verAnterior();
 	}
 
 	verConcursoDia(){
