@@ -13,7 +13,7 @@ if (Meteor.isServer) {
 
 
 Meteor.methods({
-
+	// Que bueno que hicieran pruebas sobre los datos.
 	"dibujos.insertar"(datos){
 		
 		if(!Meteor.userId()){
