@@ -53,7 +53,7 @@ Meteor.methods({
 		check(likes,Number);
 
 		Dibujos.update(id, {
-            $set: { likes:num}
+            $set: { likes:likes}
         });
 	}
 });
