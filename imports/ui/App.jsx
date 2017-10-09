@@ -13,8 +13,6 @@ import Menu_lateral from "./Menu_lateral.jsx";
 import {Concurso} from "../api/concurso.js";
 import {Dibujos} from "../api/dibujos.js";
 
-//Comentario para pushear.
-
 class App extends Component{
 	constructor(props){
 		super(props);
