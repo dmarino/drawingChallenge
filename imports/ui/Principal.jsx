@@ -22,7 +22,7 @@ class Principal extends Component{
 	componentWillUpdate(){
 		if(this.props.concursos !== null && this.props.concursos !== undefined && this.props.concursos.length!==0){
 			var tempo = this.props.concursos[1];
-		    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}).fetch();
+		    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}, { sort: { likes: -1 } }).fetch();
 		    if(this.state.concursoActual !== tempo){
 			    this.setState({
 			        concursoActual: tempo,
