@@ -31,6 +31,13 @@ class CanvasT extends Component{
 	        });
 	    }
 	    else if(newProps !== undefined){
+	    	if(this.props.like && this.state.inicio)
+	    	{
+	    		this.setState({
+	            	likes: newProps.dibujo.likes,
+	            	inicio: false
+	        	});
+	    	}
 	    	dibujo = newProps.dibujo.dibujo;
 	    }
 
