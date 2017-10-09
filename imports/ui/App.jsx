@@ -163,6 +163,7 @@ export default createContainer(()=>{
 
 	return{
 		concursos: Concurso.find({}, { sort: { fecha: -1 } }).fetch(),
-		currentUser: Meteor.user()
+		currentUser: Meteor.user(),
+		dibujos:Dibujos.find().fetch()
 	};
 },App);
