@@ -76,7 +76,7 @@ class CanvasT extends Component{
 				    :
 					    <h5><b>{this.props.dibujo.autor}</b></h5> 				
 				    }            
-                    {this.props.like ?
+                    {this.props.like && Meteor.userId() ?
                        <div>
                        		<p>likes: {this.state.likes}</p> 
                             {this.state.hizoLike ?
