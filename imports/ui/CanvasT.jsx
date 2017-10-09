@@ -22,9 +22,8 @@ class CanvasT extends Component{
 	}
 
 	componentWillUpdate(){
-
-		if(this.state.inicio &&this.props.dibujo){
-	        this.setState({
+		if(this.state.inicio &&this.props.dibujo && this.props.like){
+			this.setState({
 	            likes: this.props.dibujo.likes,
 	            inicio: false
 	        });
@@ -77,9 +76,9 @@ class CanvasT extends Component{
 				    :
 					    <h5><b>{this.props.dibujo.autor}</b></h5> 				
 				    }            
-                    <p>likes: {this.state.likes}</p> 
                     {this.props.like ?
                        <div>
+                       		<p>likes: {this.state.likes}</p> 
                             {this.state.hizoLike ?
                                 <button className="disable">Liked</button>  
                             :                      
@@ -87,7 +86,7 @@ class CanvasT extends Component{
                             }
                        </div>
                     :
-                        null
+                        <p>likes: {this.props.dibujo.likes}</p> 
                     }
                 </div>					
 			</div>

@@ -20,7 +20,8 @@ class Principal extends Component{
 	}	
 
 	componentWillUpdate(){
-		if(this.props.concursos !== null && this.props.concursos !== undefined && this.props.concursos.length>1){
+		if(this.props.concursos !== null && this.props.concursos !== undefined)
+			if(this.props.concursos.length>1){
 			var tempo = this.props.concursos[1];
 		    var tempoDibujos = Dibujos.find({"concurso":tempo.nombre}, { sort: { likes: -1 } }).fetch();
 		    if(this.state.concursoActual !== tempo){
@@ -66,6 +67,7 @@ class Principal extends Component{
 			concursos = concursos.slice(0);
 			concursos.shift();
 		    fecha = this.state.concursoActual.fecha.getDate() + "/" + (this.state.concursoActual.fecha.getMonth()+1) + "/" +  this.state.concursoActual.fecha.getFullYear();			
+			console.log(this.state.dibujosConcurso);
 			return (
 				<div className="anteriores">
 				    <select className="item" onChange={this.handleChange}>
