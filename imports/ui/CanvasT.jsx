@@ -21,15 +21,20 @@ class CanvasT extends Component{
         this.forceUpdate();  		
 	}
 
-	componentWillUpdate(){
-		if(this.state.inicio &&this.props.dibujo && this.props.like){
+	componentWillUpdate(newProps){
+		var dibujo;
+		if(this.state.inicio &&this.props.dibujo && this.props.like && newProps === undefined){
+			dibujo = this.state.dibujo.dibujo;
 			this.setState({
 	            likes: this.props.dibujo.likes,
 	            inicio: false
 	        });
 	    }
+	    else if(newProps !== undefined){
+	    	dibujo = newProps.dibujo.dibujo;
+	    }
 
-		this.redraw();
+		this.redraw(dibujo);
 	}
 
 	like(){
@@ -43,22 +48,23 @@ class CanvasT extends Component{
 	    Meteor.call("dibujos.updateLikes",this.props.dibujo._id,num);  
 	}
 
-	redraw() {
-        let ctx = this.canvas.getContext("2d");
-        ctx.clearRect(0, 0,500, 500);
-
-        for(var i=0; i < this.props.dibujo.dibujo.length; i++) {  
-            ctx.beginPath();
-            if(this.props.dibujo.dibujo[i].dragging && i){
-                ctx.moveTo(this.props.dibujo.dibujo[i-1].x, this.props.dibujo.dibujo[i-1].y);
-            }else{
-                ctx.moveTo(this.props.dibujo.dibujo[i].x-1, this.props.dibujo.dibujo[i].y);
-            }
-            ctx.lineTo(this.props.dibujo.dibujo[i].x, this.props.dibujo.dibujo[i].y);
-            ctx.closePath();
-            ctx.strokeStyle = this.props.dibujo.dibujo[i].color;
-            ctx.stroke();
-        }
+	redraw(dibujo) {
+		if(dibujo !== null && dibujo !== undefined){
+	        let ctx = this.canvas.getContext("2d");
+	        ctx.clearRect(0, 0,500, 500);
+	        for(var i=0; i < dibujo.length; i++) {  
+	            ctx.beginPath();
+	            if(dibujo[i].dragging && i){
+	                ctx.moveTo(dibujo[i-1].x, dibujo[i-1].y);
+	            }else{
+	                ctx.moveTo(dibujo[i].x-1, dibujo[i].y);
+	            }
+	            ctx.lineTo(dibujo[i].x, dibujo[i].y);
+	            ctx.closePath();
+	            ctx.strokeStyle = dibujo[i].color;
+	            ctx.stroke();
+	        }
+	    }
     }
 
 	render(){

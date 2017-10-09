@@ -67,7 +67,6 @@ class Principal extends Component{
 			concursos = concursos.slice(0);
 			concursos.shift();
 		    fecha = this.state.concursoActual.fecha.getDate() + "/" + (this.state.concursoActual.fecha.getMonth()+1) + "/" +  this.state.concursoActual.fecha.getFullYear();			
-			console.log(this.state.dibujosConcurso);
 			return (
 				<div className="anteriores">
 				    <select className="item" onChange={this.handleChange}>
