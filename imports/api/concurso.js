@@ -11,7 +11,7 @@ if (Meteor.isServer) {
   });
 }
 
-
+// No es necesario tener un llamado a methods si este está vacío.
 Meteor.methods({
 
 
