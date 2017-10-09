@@ -12,7 +12,7 @@ class CanvasT extends Component{
 		super(props);
 		this.state = {
 		    likes:0,
-		    cambio:false,
+		    hizoLike:false,
 		    inicio:true
 		}
 	}
@@ -22,29 +22,26 @@ class CanvasT extends Component{
 	}
 
 	componentWillUpdate(){
+
 		if(this.state.inicio){
 	        this.setState({
 	            likes: this.props.dibujo.likes,
 	            inicio: false
 	        });
 	    }
-	    if(this.state.cambio){
-	        Meteor.call("dibujos.updateLikes",this.props.dibujo._id,this.state.likes);
 
-	        this.setState({
-	            cambio: false
-	        });
-	    }
 		this.redraw();
 	}
 
 	like(){
 	    var num = this.props.dibujo.likes+1;
+
 	    this.setState({
 	        likes: num,
-	        cambio: true
-	    })     
-        this.forceUpdate();   
+            hizoLike: true		        
+	    }) 
+
+	    Meteor.call("dibujos.updateLikes",this.props.dibujo._id,num);  
 	}
 
 	redraw() {
@@ -82,7 +79,13 @@ class CanvasT extends Component{
 				    }            
                     <p>likes: {this.state.likes}</p> 
                     {this.props.like ?
-                        <button onClick={()=>this.like()} >Like</button>
+                       <div>
+                            {this.state.hizoLike ?
+                                <button className="disable">Liked</button>  
+                            :                      
+                                <button className="enable" onClick={()=>this.like()}>Like</button>                        
+                            }
+                       </div>
                     :
                         null
                     }

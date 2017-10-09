@@ -17,7 +17,6 @@ class Principal extends Component{
 
 	participar(){
 		this.props.participar();
-		console.log(this.props.concursos[0].fecha);
 	}	
 
 	componentWillUpdate(){
