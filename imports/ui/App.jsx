@@ -45,7 +45,7 @@ class App extends Component{
 	}
 
 	participar(){
-
+		// en la medida de lo posible eviten el uso de var.
 		var dibujar = this.state.dibujando;
 		dibujar = !dibujar;
 
