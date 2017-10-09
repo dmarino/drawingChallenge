@@ -23,7 +23,7 @@ class CanvasT extends Component{
 
 	componentWillUpdate(){
 
-		if(this.state.inicio){
+		if(this.state.inicio &&this.props.dibujo){
 	        this.setState({
 	            likes: this.props.dibujo.likes,
 	            inicio: false
