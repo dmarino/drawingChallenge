@@ -11,7 +11,7 @@ if (Meteor.isServer) {
   });
 }
 
-
+// No es necesario.
 Meteor.methods({
 
 

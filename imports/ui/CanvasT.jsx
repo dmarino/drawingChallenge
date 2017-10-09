@@ -22,6 +22,7 @@ class CanvasT extends Component{
 	}
 
 	componentWillUpdate(newProps){
+		// Seria mas legible con indentacion apropiada.
 		var dibujo;
 		if(this.state.inicio &&this.props.dibujo && this.props.like && newProps === undefined){
 			dibujo = this.state.dibujo.dibujo;
